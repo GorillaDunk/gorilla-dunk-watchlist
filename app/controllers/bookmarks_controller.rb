@@ -17,9 +17,9 @@ class BookmarksController < ApplicationController
     id = params[:id].split('/')
     list_id = id[0]
     movie_id = id[1]
-    @bookmark = Bookmark.where(list_id: list_id, movie_id: movie_id)
-    @bookmark.destroy
-    redirect_to list_path(@list)
+    @bookmark = Bookmark.where(movie_id: movie_id, list_id: list_id)
+    Bookmark.destroy(@bookmark.ids)
+    redirect_to list_path(list_id)
   end
 
   private
