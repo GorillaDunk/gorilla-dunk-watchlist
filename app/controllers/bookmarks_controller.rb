@@ -13,6 +13,15 @@ class BookmarksController < ApplicationController
     redirect_to list_path(@list)
   end
 
+  def destroy
+    id = params[:id].split('/')
+    list_id = id[0]
+    movie_id = id[1]
+    @bookmark = Bookmark.where(list_id: list_id, movie_id: movie_id)
+    @bookmark.destroy
+    redirect_to list_path(@list)
+  end
+
   private
 
   def params_bookmark
